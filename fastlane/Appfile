@@ -1,0 +1,2 @@
+json_key_file "~/Documents/Google Play Android Developer-ac27f8c8304d.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+package_name "com.alexqueudotrafel.retrofitrealmsample" # e.g. com.krausefx.app
