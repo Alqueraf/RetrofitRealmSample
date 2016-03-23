@@ -22,7 +22,6 @@ public class Question extends RealmObject{
     private long unixDate;
 
     public Question() {
-
     }
 
     public long getId() {
