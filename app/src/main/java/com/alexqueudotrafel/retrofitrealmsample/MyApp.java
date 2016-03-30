@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -33,7 +32,6 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        if(D) Log.d(TAG, "On Create: "+TAG);
 
         //Inits
         initRealm();

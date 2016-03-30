@@ -1,12 +1,12 @@
 package com.alexqueudotrafel.retrofitrealmsample.ui;
 
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.alexqueudotrafel.retrofitrealmsample.R;
 import com.alexqueudotrafel.retrofitrealmsample.activity.MainActivity;
-import com.alexqueudotrafel.retrofitrealmsample.model.Question;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -16,12 +16,13 @@ import org.junit.runner.RunWith;
 import tools.fastlane.screengrab.Screengrab;
 import tools.fastlane.screengrab.locale.LocaleTestRule;
 
-import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
 
 /**
  * Created by alexqueudotrafel on 22/03/16.
@@ -39,16 +40,36 @@ public class SampleUITest {
 
     /**
      * Check the our listView is not empty after retrieving data from the backend
+     * NOPE. We no longer have a listview :)
      */
-    @Test
+    /*@Test
     public void listShouldNotBeEmpty(){
         onData(instanceOf(Question.class))
-                .inAdapterView(allOf(withId(R.id.listview), isDisplayed()))
+                .inAdapterView(allOf(withId(R.id.recyclerView), isDisplayed()))
                 .atPosition(0)
                 .check(matches(isDisplayed()));
 
         // Take screenshots @param: fileName (String)
         Screengrab.screenshot("listView1");
         Screengrab.screenshot("listView2");
+    }*/
+
+    @Test
+    public void clickOnRecyclerViewItem(){
+        onView(withId(R.id.recyclerView))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        Screengrab.screenshot("list1");
+        Screengrab.screenshot("list2");
+    }
+
+    @Test
+    public void swipeToDeleteAndUndoRecyclerViewItem(){
+        onView(withId(R.id.recyclerView))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeRight()));
+        Screengrab.screenshot("swipe");
+
+        onView(allOf(withId(android.support.design.R.id.snackbar_action)))
+                .check(matches(isDisplayed()))
+                .perform(click());
     }
 }

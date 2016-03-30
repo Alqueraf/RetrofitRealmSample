@@ -134,4 +134,11 @@ public class RealmHelper {
         copyOrUpdateAsync(objects.get(0), successCallback, errorCallback);
     }
 
+    public static <E extends RealmObject> void removeEntry(final E object){
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.beginTransaction();
+        object.removeFromRealm();
+        realm.commitTransaction();
+    }
 }

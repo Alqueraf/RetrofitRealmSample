@@ -24,6 +24,13 @@ public class Question extends RealmObject{
     public Question() {
     }
 
+    public Question(long id, String title, String link, long unixDate) {
+        this.id = id;
+        this.title = title;
+        this.link = link;
+        this.unixDate = unixDate;
+    }
+
     public long getId() {
         return id;
     }

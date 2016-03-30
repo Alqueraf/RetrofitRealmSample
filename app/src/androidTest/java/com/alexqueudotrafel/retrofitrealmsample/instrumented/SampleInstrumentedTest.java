@@ -36,24 +36,19 @@ public class SampleInstrumentedTest {
         new RealmConfiguration.Builder(tempFolder).build();
     }
 
-    private static final String TESTQUESTION_TITLE = "Will this exciting test work?";
-
     @Test
     public void shouldBeAbleToSaveAndRetrieveQuestionOnRealm(){
         // Get Realm
         Realm realm = Realm.getDefaultInstance();
-        // Create random question
-        Question question = new Question();
-        question.setId(1);
-        question.setTitle(TESTQUESTION_TITLE);
-        question.setLink("https://realm.io/");
+        // Create some question
+        Question question = new Question(1, "Will this exciting test work?", "https://realm.io/", System.currentTimeMillis()/1000l);
         // Save to Realm
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(question);
         realm.commitTransaction();
         // Retrieve
-        Question realmQuestion = realm.where(Question.class).contains("title", TESTQUESTION_TITLE).findFirst();
-        assertThat(realmQuestion.getTitle(), is(TESTQUESTION_TITLE));
+        Question realmQuestion = realm.where(Question.class).equalTo("id", 1).findFirst();
+        assertThat(realmQuestion.getId(), is(1l));
 
         Realm.getDefaultInstance().close();
     }
