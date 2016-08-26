@@ -9,7 +9,7 @@
 
     <!-- Buttons -->
     <dimen name="button_height">36dp</dimen>
-    <dimen name="button_widt_min">48dp</dimen>
+    <dimen name="button_width_min">48dp</dimen>
     <dimen name="button_horizontal_padding">16dp</dimen>
 
 
